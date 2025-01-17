@@ -1,4 +1,9 @@
-/////
+
+
+///////////////////////////////////////////////تول توبببب
+
+
+//src/components/Sidebar/Sidebar.tsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -11,7 +16,11 @@ import {
   ChevronDown,
   ChevronUp,
   LucideIcon,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from '../../context/ThemeContext';
+import "./Sidebar.scss";
 
 interface SidebarItem {
   name: string;
@@ -38,113 +47,114 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: "Settings", icon: Settings, color: "#42c9c2", href: "/settings" },
 ];
 
-const Sidebar: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+interface SidebarProps {
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const { mode, toggleTheme } = useTheme();
 
   const toggleSubMenu = (itemName: string) => {
     setExpandedItem(expandedItem === itemName ? null : itemName);
   };
+  const renderThemeToggle = () => (
+    <button onClick={toggleTheme} className="nav-item theme-toggle">
+      {mode === 'dark' ? (
+        <Sun className="item-icon" style={{ color: "#4068DF" }} />
+      ) : (
+        <Moon className="item-icon" style={{ color: "#4068DF" }} />
+      )}
+      {isOpen && (
+        <span className="item-text" style={{ color: "#4068DF" }}>
+          {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+        </span>
+      )}
+    </button>
+  );
 
   return (
-    <div
-      className={`flex h-screen bg-white ${
-        isSidebarOpen ? "w-64" : "w-20"
-      } transition-all duration-300 ease-in-out relative`}
-    >
-      <div className="flex flex-col h-full border-r border-gray-200">
+    <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+      <div className="sidebar-content">
         <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="absolute -right-3 top-1/2 transform -translate-y-1/2 bg-white border-2 border-gray-200 rounded-full p-1 hover:scale-110 transition-transform duration-200"
+          onClick={onToggle}
+          className="toggle-button"
+          aria-label="Toggle sidebar"
         >
-          {isSidebarOpen ? (
-            <ChevronLeft className="w-4 h-4 text-[#4068DF]" />
+          {isOpen ? (
+            <ChevronLeft className="w-4 h-4" />
           ) : (
-            <ChevronRight className="w-4 h-4 text-[#4068DF]" />
+            <ChevronRight className="w-4 h-4" />
           )}
         </button>
 
-        <div className="p-4">
+        <div className="logo-container">
           <img
-            src={
-              isSidebarOpen
-                ? "/public/Digitinary-Logo.png"
-                : "/public/digitinary_logo-removebg-preview.png"
-            }
+            src={isOpen ? "/Digitinary-Logo.png" : "/digitinary_logo-removebg-preview.png"}
             alt="Logo"
-            className={`transition-all duration-200 ${
-              isSidebarOpen ? "w-full" : "w-12"
-            }`}
+            className="logo-image"
           />
         </div>
 
-        <nav className="flex-1 px-4 mt-8">
-          {SIDEBAR_ITEMS.map((item: SidebarItem, index: number) => (
-            <div key={item.href}>
+        <nav className="navigation">
+          {SIDEBAR_ITEMS.map((item, index) => (
+            <div key={item.href} className="nav-item-wrapper">
               {item.subItems ? (
                 <div
                   onClick={() => toggleSubMenu(item.name)}
-                  className="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
+                  className="nav-item"
                 >
                   <item.icon
-                    className="w-5 h-5"
+                    className="item-icon"
                     style={{ color: item.color }}
                   />
-                  {isSidebarOpen && (
+                  {isOpen && (
                     <>
                       <span
-                        className="ml-4 text-sm font-medium text-gray-700 whitespace-nowrap overflow-hidden transition-all duration-200"
+                        className="item-text"
                         style={{
                           color: index % 2 === 0 ? "#4068DF" : "#42c9c2",
                         }}
                       >
                         {item.name}
                       </span>
-                      <div className="ml-auto">
+                      <div className="arrow-icon">
                         {expandedItem === item.name ? (
-                          <ChevronUp
-                            className="w-4 h-4"
-                            style={{ color: item.color }}
-                          />
+                          <ChevronUp style={{ color: item.color }} />
                         ) : (
-                          <ChevronDown
-                            className="w-4 h-4"
-                            style={{ color: item.color }}
-                          />
+                          <ChevronDown style={{ color: item.color }} />
                         )}
                       </div>
                     </>
                   )}
                 </div>
               ) : (
-                // Render as link if it doesn't have subitems
-                <Link to={item.href}>
-                  <div className="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                    <item.icon
-                      className="w-5 h-5"
-                      style={{ color: item.color }}
-                    />
-                    {isSidebarOpen && (
-                      <span
-                        className="ml-4 text-sm font-medium text-gray-700 whitespace-nowrap overflow-hidden transition-all duration-200"
-                        style={{
-                          color: index % 2 === 0 ? "#4068DF" : "#42c9c2",
-                        }}
-                      >
-                        {item.name}
-                      </span>
-                    )}
-                  </div>
+                <Link to={item.href} className="nav-item">
+                  <item.icon
+                    className="item-icon"
+                    style={{ color: item.color }}
+                  />
+                  {isOpen && (
+                    <span
+                      className="item-text"
+                      style={{
+                        color: index % 2 === 0 ? "#4068DF" : "#42c9c2",
+                      }}
+                    >
+                      {item.name}
+                    </span>
+                  )}
                 </Link>
               )}
 
-              {isSidebarOpen && item.subItems && expandedItem === item.name && (
-                <div className="ml-9 mb-2">
+              {isOpen && item.subItems && expandedItem === item.name && (
+                <div className="subitems">
                   {item.subItems.map((subItem) => (
                     <Link
                       key={subItem.href}
                       to={subItem.href}
-                      className="block py-2 px-4 text-sm hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                      className="subitem"
                       style={{ color: subItem.color }}
                     >
                       {subItem.name}
@@ -154,6 +164,11 @@ const Sidebar: React.FC = () => {
               )}
             </div>
           ))}
+          
+          {/* Add theme toggle at the end of navigation */}
+          <div className="nav-item-wrapper">
+            {renderThemeToggle()}
+          </div>
         </nav>
       </div>
     </div>

@@ -1,4 +1,4 @@
-// src/components/D-gate/BusinessRequirements.tsx
+// src/components/Arena/BusinessRequirements.tsx
 import React from 'react';
 import {
   Card,
@@ -12,23 +12,25 @@ import {
   ListItemText,
   Box,
   Link,
+  useTheme,
 } from '@mui/material';
 import {
   Business,
   Description,
   LibraryBooks,
   Link as LinkIcon,
-  Info as InfoIcon, // Added InfoIcon import
+  Info as InfoIcon,
 } from '@mui/icons-material';
 
-interface BusinessRequirementsProps {
-  isSidebarOpen: boolean;
-}
+const BusinessRequirements: React.FC = () => {
+  const theme = useTheme();
 
-const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOpen }) => {
   return (
     <Box sx={{ padding: 3 }}>
-      <Card sx={{ backgroundColor: '#f8f9fa' }}>
+      <Card sx={{ 
+        bgcolor: 'background.paper',
+        transition: 'all 0.3s ease'
+      }}>
         <CardContent>
           <Grid container spacing={3}>
             {/* Main Title */}
@@ -52,7 +54,11 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
 
             {/* Overview Section */}
             <Grid item xs={12}>
-              <Paper elevation={3} sx={{ p: 3, backgroundColor: 'white' }}>
+              <Paper elevation={3} sx={{ 
+                p: 3, 
+                bgcolor: 'background.default',
+                transition: 'all 0.3s ease'
+              }}>
                 <Typography 
                   variant="h6" 
                   gutterBottom 
@@ -66,7 +72,14 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
                   <Description />
                   Overview
                 </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ ml: 4 }}>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    ml: 4,
+                    color: 'text.primary',
+                    transition: 'color 0.3s ease'
+                  }}
+                >
                   A comprehensive description of the key business requirements and objectives for the project.
                   These requirements form the foundation of our development process and ensure alignment with
                   business goals and stakeholder expectations.
@@ -76,7 +89,11 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
 
             {/* Resources Section */}
             <Grid item xs={12}>
-              <Paper elevation={3} sx={{ p: 3, backgroundColor: 'white' }}>
+              <Paper elevation={3} sx={{ 
+                p: 3, 
+                bgcolor: 'background.default',
+                transition: 'all 0.3s ease'
+              }}>
                 <Typography 
                   variant="h6" 
                   gutterBottom 
@@ -90,7 +107,15 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
                   <LibraryBooks />
                   Resources
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ ml: 4, mb: 2 }}>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    ml: 4, 
+                    mb: 2,
+                    color: 'text.secondary',
+                    transition: 'color 0.3s ease'
+                  }}
+                >
                   Refer to the following links for more detailed information about our business requirements:
                 </Typography>
                 <List sx={{ ml: 4 }}>
@@ -100,14 +125,19 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
                     </ListItemIcon>
                     <ListItemText 
                       primary={
-                        <Link href="#" color="primary" sx={{ 
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 1,
-                          '&:hover': {
-                            textDecoration: 'underline'
-                          }
-                        }}>
+                        <Link 
+                          href="#" 
+                          sx={{ 
+                            color: 'primary.main',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            transition: 'color 0.3s ease',
+                            '&:hover': {
+                              color: 'primary.light',
+                            }
+                          }}
+                        >
                           Business Docs Link 1
                         </Link>
                       }
@@ -119,14 +149,19 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
                     </ListItemIcon>
                     <ListItemText 
                       primary={
-                        <Link href="#" color="primary" sx={{ 
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 1,
-                          '&:hover': {
-                            textDecoration: 'underline'
-                          }
-                        }}>
+                        <Link 
+                          href="#" 
+                          sx={{ 
+                            color: 'primary.main',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            transition: 'color 0.3s ease',
+                            '&:hover': {
+                              color: 'primary.light',
+                            }
+                          }}
+                        >
                           Business Docs Link 2
                         </Link>
                       }
@@ -140,18 +175,21 @@ const BusinessRequirements: React.FC<BusinessRequirementsProps> = ({ isSidebarOp
             <Grid item xs={12}>
               <Paper elevation={3} sx={{ 
                 p: 3, 
-                backgroundColor: 'white',
-                border: '1px solid #e0e0e0',
-                borderLeft: '4px solid #4068df'
+                bgcolor: 'background.default',
+                border: '1px solid',
+                borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.12)' : '#e0e0e0',
+                borderLeft: `4px solid ${theme.palette.primary.main}`,
+                transition: 'all 0.3s ease'
               }}>
                 <Typography 
                   variant="body2" 
-                  color="text.secondary"
                   sx={{ 
                     fontStyle: 'italic',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 1
+                    gap: 1,
+                    color: 'text.secondary',
+                    transition: 'color 0.3s ease'
                   }}
                 >
                   <InfoIcon color="primary" fontSize="small" />
