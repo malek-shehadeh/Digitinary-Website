@@ -119,37 +119,96 @@
 // }
 //////////////////
 // ///
-// @use "src/styles/variables.scss" as vars;
-// .progress-stepper-container {
-//   width: 100%;
-//   padding: vars.$spacing-lg;
+// src/components/ProgressStepper/ProgressStepper.scss
+@use "../../styles/variables.scss" as vars;
 
-//   .stepper {
-//     margin-bottom: vars.$spacing-lg;
-//   }
+.progress-stepper-container {
+  width: 100%;
+  padding: vars.$spacing-lg;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-//   .stepper-content {
-//     .step-text {
-//       margin: vars.$spacing-md 0;
-//       font-size: 1.1rem;
-//     }
+  .stepper {
+    margin-bottom: vars.$spacing-lg;
 
-//     .button-container {
-//       display: flex;
-//       flex-direction: row;
-//       padding-top: vars.$spacing-md;
+    .MuiStepLabel-root {
+      .MuiStepLabel-label {
+        font-size: 0.9rem;
+        
+        &.Mui-active {
+          color: vars.$primary-color;
+          font-weight: 600;
+        }
+      }
+    }
 
-//       .back-button {
-//         margin-right: vars.$spacing-md;
-//       }
+    .MuiStepIcon-root {
+      &.Mui-active {
+        color: vars.$primary-color;
+      }
+      &.Mui-completed {
+        color: vars.$secondary-color;
+      }
+    }
+  }
 
-//       .skip-button {
-//         margin-right: vars.$spacing-md;
-//       }
+  .stepper-content {
+    .step-text {
+      margin: vars.$spacing-md 0;
+      font-size: 1.1rem;
+      color: vars.$text-color;
+    }
 
-//       .spacer {
-//         flex: 1 1 auto;
-//       }
-//     }
-//   }
-// }
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      padding-top: vars.$spacing-md;
+      align-items: center;
+
+      .back-button {
+        margin-right: vars.$spacing-md;
+      }
+
+      .skip-button {
+        margin-right: vars.$spacing-md;
+      }
+
+      .spacer {
+        flex: 1 1 auto;
+      }
+
+      .MuiButton-contained {
+        background-color: vars.$primary-color;
+        &:hover {
+          background-color: darken(vars.$primary-color, 10%);
+        }
+      }
+
+      .MuiButton-text {
+        color: vars.$text-color;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .progress-stepper-container {
+    padding: vars.$spacing-md;
+
+    .button-container {
+      flex-wrap: wrap;
+      gap: vars.$spacing-sm;
+      
+      button {
+        flex: 1;
+        min-width: 120px;
+        margin: 0;
+      }
+    }
+  }
+}

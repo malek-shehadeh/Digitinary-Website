@@ -54,6 +54,58 @@
 ////
 ///
 // Global Styles
+// // global.scss
+// // CSS Reset
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+// }
+// body {
+//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+//     "Helvetica Neue", Arial, sans-serif;
+//   background-color: #ffffff; // Changed from #1a1a1a to white
+//   color: #333333;
+//   line-height: 1.6;
+// }
+
+// // Typography
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin: 0;
+//   font-weight: 600;
+// }
+
+// a {
+//   color: inherit;
+//   text-decoration: none;
+// }
+
+// button {
+//   cursor: pointer;
+//   border: none;
+//   background: none;
+// }
+
+// // Layout
+// .app-container {
+//   display: flex;
+//   min-height: 100vh;
+//   background-color: #ffffff;
+// }
+
+// .main-content {
+//   flex: 1;
+//   padding: 1rem;
+//   overflow-y: auto;
+//   background-color: #ffffff;
+// }
+///
+///
 // global.scss
 // CSS Reset
 * {
@@ -61,10 +113,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  background-color: #ffffff; // Changed from #1a1a1a to white
+  background-color: #ffffff;
   color: #333333;
   line-height: 1.6;
 }
@@ -96,6 +149,7 @@ button {
   display: flex;
   min-height: 100vh;
   background-color: #ffffff;
+  position: relative; // Added for absolute positioning of children
 }
 
 .main-content {
@@ -103,4 +157,59 @@ button {
   padding: 1rem;
   overflow-y: auto;
   background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+
+  &.sidebar-open {
+    margin-left: 256px;
+    width: calc(100% - 256px);
+  }
+
+  &.sidebar-closed {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+  }
+
+  // Component container styles
+  .component-container {
+    transition: all 0.3s ease-in-out;
+    padding: 1rem;
+
+    &.sidebar-open {
+      max-width: calc(100vw - 256px - 2rem); // Account for padding
+    }
+
+    &.sidebar-closed {
+      max-width: calc(100vw - 80px - 2rem); // Account for padding
+    }
+  }
+
+  // Stepper layouts
+  .stepper-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    transition: all 0.3s ease-in-out;
+
+    .progress-stepper,
+    .vertical-stepper {
+      flex: 1;
+      min-width: 0;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .main-content {
+    &.sidebar-open,
+    &.sidebar-closed {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  .stepper-container {
+    flex-direction: column;
+  }
 }
