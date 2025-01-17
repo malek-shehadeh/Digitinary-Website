@@ -1,159 +1,40 @@
-// // .stepper-controls {
-// //   margin-bottom: 2rem;
 
-// //   button {
-// //     margin-right: 1rem;
-
-// //     &:last-child {
-// //       margin-right: 0;
-// //     }
-// //   }
-// // }
-
-// // .screen-reader {
-// //   position: absolute;
-// //   width: 1px;
-// //   height: 1px;
-// //   padding: 0;
-// //   margin: -1px;
-// //   overflow: hidden;
-// //   clip: rect(0, 0, 0, 0);
-// //   white-space: nowrap;
-// //   border: 0;
-
-// //   &:focus {
-// //     position: static;
-// //     width: auto;
-// //     height: auto;
-// //     overflow: visible;
-// //     clip: auto;
-// //     white-space: normal;
-// //   }
-// // }
-
-// // .pf-v6-c-progress-stepper {
-// //   --pf-v6-c-progress-stepper--GridGap: 1rem;
-// //   --pf-v6-c-progress-stepper__step-icon--Width: 1.5rem;
-// //   --pf-v6-c-progress-stepper__step-icon--Height: 1.5rem;
-
-// //   list-style: none;
-// //   padding: 0;
-// //   margin: 0;
-
-// //   &__step {
-// //     position: relative;
-// //     display: flex;
-// //     gap: var(--pf-v6-c-progress-stepper--GridGap);
-// //     padding: 0.5rem 0;
-
-// //     &-connector {
-// //       display: flex;
-// //       align-items: center;
-// //     }
-
-// //     &-icon {
-// //       display: flex;
-// //       align-items: center;
-// //       justify-content: center;
-// //       width: var(--pf-v6-c-progress-stepper__step-icon--Width);
-// //       height: var(--pf-v6-c-progress-stepper__step-icon--Height);
-// //       border-radius: 50%;
-
-// //       i {
-// //         font-size: 1rem;
-// //       }
-// //     }
-
-// //     &-main {
-// //       flex: 1;
-// //       min-width: 0;
-// //     }
-
-// //     &-title {
-// //       font-weight: 500;
-// //       line-height: 1.5;
-// //     }
-
-// //     // Status modifiers
-// //     &.pf-m-success {
-// //       .pf-v6-c-progress-stepper__step-icon {
-// //         background-color: #3e8635;
-// //         color: white;
-// //       }
-// //     }
-
-// //     &.pf-m-current {
-// //       font-weight: bold;
-
-// //       &.pf-m-danger .pf-v6-c-progress-stepper__step-icon {
-// //         background-color: #c9190b;
-// //         color: white;
-// //       }
-// //     }
-
-// //     &.pf-m-pending {
-// //       .pf-v6-c-progress-stepper__step-icon {
-// //         border: 2px solid #d2d2d2;
-// //       }
-// //     }
-// //   }
-// // }
-// ///
-// ///
-// @use "/src/styles/variables.scss" as vars;
-
-// .dgate-page {
-//   padding: vars.$spacing-lg;
-
-//   .stepper-container {
-//     display: flex;
-//     gap: vars.$spacing-lg;
-//     margin-top: vars.$spacing-lg;
-
-//     .progress-stepper {
-//       flex: 1;
-//       min-width: 0; // Prevents flex item from overflowing
-//     }
-
-//     .vertical-stepper {
-//       flex: 1;
-//       min-width: 0; // Prevents flex item from overflowing
-//     }
-//   }
-// }
-///
-///
-// src/components/D-gate/D-gate.scss
-@use "/src/styles/variables.scss" as vars;
+//src/components/D-gate/D-gate.scss
+@use "sass:color";
+@use "../../styles/variables" as *;
 
 .component-container {
   h1 {
-    color: vars.$text-color;
-    margin-bottom: vars.$spacing-lg;
+    color: var(--text-color);
+    margin-bottom: $spacing-lg;
+    transition: color 0.3s ease;
   }
 
   .stepper-container {
     display: flex;
     flex-direction: column;
-    gap: vars.$spacing-lg;
-    background-color: vars.$background-color;
+    gap: $spacing-lg;
+    background-color: var(--background-color);
     border-radius: 8px;
-    
+    transition: background-color 0.3s ease;
+   
     .progress-stepper {
-      padding: vars.$spacing-md;
-      background-color: white;
+      padding: $spacing-md;
+      background-color: var(--paper-background);
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .content-area {
       flex: 1;
       min-height: 0;
-      padding: vars.$spacing-md;
-      background-color: white;
+      padding: $spacing-md;
+      background-color: var(--paper-background);
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
       // Custom scrollbar
       &::-webkit-scrollbar {
@@ -161,17 +42,17 @@
       }
 
       &::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: var(--hover-bg);
         border-radius: 4px;
       }
 
       &::-webkit-scrollbar-thumb {
-        background: #888;
+        background: var(--text-secondary);
         border-radius: 4px;
-      }
 
-      &::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        &:hover {
+          background: var(--text-color);
+        }
       }
     }
   }
@@ -182,7 +63,7 @@
   .component-container {
     .stepper-container {
       flex-direction: column;
-      
+     
       .progress-stepper,
       .content-area {
         width: 100%;

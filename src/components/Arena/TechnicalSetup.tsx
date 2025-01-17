@@ -1,10 +1,9 @@
-// src/components/D-gate/TechnicalSetup.tsx
+// src/components/Arena/TechnicalSetup.tsx
 import React from 'react';
 import {
   Card,
   CardContent,
   Typography,
-  Grid,
   Paper,
   List,
   ListItem,
@@ -12,6 +11,7 @@ import {
   ListItemText,
   Box,
   Chip,
+  useTheme,
 } from '@mui/material';
 import {
   Code,
@@ -24,11 +24,9 @@ import {
   Architecture,
 } from '@mui/icons-material';
 
-interface TechnicalSetupProps {
-  isSidebarOpen: boolean;
-}
+const TechnicalSetup: React.FC = () => {
+  const theme = useTheme();
 
-const TechnicalSetup: React.FC<TechnicalSetupProps> = ({ isSidebarOpen }) => {
   const requiredRepos = [
     {
       name: 'container',
@@ -68,11 +66,14 @@ const TechnicalSetup: React.FC<TechnicalSetupProps> = ({ isSidebarOpen }) => {
 
   return (
     <Box sx={{ padding: 3 }}>
-      <Card sx={{ backgroundColor: '#f8f9fa' }}>
+      <Card sx={{ 
+        bgcolor: 'background.paper',
+        transition: 'all 0.3s ease'
+      }}>
         <CardContent>
-          <Grid container spacing={3}>
+          <Box sx={{ display: 'grid', gap: 3 }}>
             {/* Main Title */}
-            <Grid item xs={12}>
+            <Box>
               <Typography 
                 variant="h4" 
                 component="h2" 
@@ -88,159 +89,210 @@ const TechnicalSetup: React.FC<TechnicalSetupProps> = ({ isSidebarOpen }) => {
                 <Code sx={{ fontSize: 32 }} />
                 Step 3: Technical Setup
               </Typography>
-            </Grid>
+            </Box>
 
             {/* Overview Section */}
-            <Grid item xs={12}>
-              <Paper elevation={3} sx={{ p: 3, backgroundColor: 'white' }}>
-                <Typography 
-                  variant="h6" 
-                  gutterBottom 
-                  color="primary"
-                  sx={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1
-                  }}
-                >
-                  <Description />
-                  Overview
-                </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ ml: 4 }}>
-                  This section outlines the technical requirements and setup process for the project.
-                  Follow these instructions carefully to ensure a proper development environment setup.
-                </Typography>
-              </Paper>
-            </Grid>
+            <Paper elevation={3} sx={{ 
+              p: 3, 
+              bgcolor: 'background.default',
+              transition: 'all 0.3s ease'
+            }}>
+              <Typography 
+                variant="h6" 
+                gutterBottom 
+                color="primary"
+                sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1
+                }}
+              >
+                <Description />
+                Overview
+              </Typography>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  ml: 4,
+                  color: 'text.primary',
+                  transition: 'color 0.3s ease'
+                }}
+              >
+                This section outlines the technical requirements and setup process for the project.
+                Follow these instructions carefully to ensure a proper development environment setup.
+              </Typography>
+            </Paper>
 
             {/* Required Repositories Section */}
-            <Grid item xs={12}>
-              <Paper elevation={3} sx={{ p: 3, backgroundColor: 'white' }}>
-                <Typography 
-                  variant="h6" 
-                  gutterBottom 
-                  color="primary"
-                  sx={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1
-                  }}
-                >
-                  <GitHub />
-                  Required Repositories
-                </Typography>
-                <List sx={{ ml: 4 }}>
-                  {requiredRepos.map((repo) => (
-                    <ListItem key={repo.name}>
-                      <ListItemIcon>
-                        <CheckCircle color="success" />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography variant="subtitle1" color="primary">
-                              {repo.name}
-                            </Typography>
-                            <Chip 
-                              label="Required" 
-                              size="small" 
-                              color="primary" 
-                              sx={{ height: 20 }}
-                            />
-                          </Box>
-                        }
-                        secondary={repo.description}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            </Grid>
+            <Paper elevation={3} sx={{ 
+              p: 3, 
+              bgcolor: 'background.default',
+              transition: 'all 0.3s ease'
+            }}>
+              <Typography 
+                variant="h6" 
+                gutterBottom 
+                color="primary"
+                sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1
+                }}
+              >
+                <GitHub />
+                Required Repositories
+              </Typography>
+              <List sx={{ ml: 4 }}>
+                {requiredRepos.map((repo) => (
+                  <ListItem key={repo.name}>
+                    <ListItemIcon>
+                      <CheckCircle color="success" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Typography variant="subtitle1" color="primary">
+                            {repo.name}
+                          </Typography>
+                          <Chip 
+                            label="Required" 
+                            size="small" 
+                            color="primary" 
+                            sx={{ 
+                              height: 20,
+                              bgcolor: theme.palette.mode === 'dark' ? 'primary.dark' : 'primary.main',
+                              color: 'white',
+                            }}
+                          />
+                        </Box>
+                      }
+                      secondary={
+                        <Typography 
+                          variant="body2" 
+                          sx={{ color: 'text.secondary' }}
+                        >
+                          {repo.description}
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
 
             {/* Optional Repositories Section */}
-            <Grid item xs={12}>
-              <Paper elevation={3} sx={{ p: 3, backgroundColor: 'white' }}>
-                <Typography 
-                  variant="h6" 
-                  gutterBottom 
-                  color="primary"
-                  sx={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1
-                  }}
-                >
-                  <Storage />
-                  Optional Repositories
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ ml: 4, mb: 2 }}>
-                  Install based on the module you need:
-                </Typography>
-                <List sx={{ ml: 4 }}>
-                  {optionalRepos.map((repo) => (
-                    <ListItem key={repo.name}>
-                      <ListItemIcon>
-                        <RadioButtonUnchecked color="primary" />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography variant="subtitle1" color="primary">
-                              {repo.name}
-                            </Typography>
-                            <Chip 
-                              label="Optional" 
-                              size="small" 
-                              variant="outlined" 
-                              color="primary"
-                              sx={{ height: 20 }}
-                            />
-                          </Box>
-                        }
-                        secondary={repo.description}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            </Grid>
+            <Paper elevation={3} sx={{ 
+              p: 3, 
+              bgcolor: 'background.default',
+              transition: 'all 0.3s ease'
+            }}>
+              <Typography 
+                variant="h6" 
+                gutterBottom 
+                color="primary"
+                sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1
+                }}
+              >
+                <Storage />
+                Optional Repositories
+              </Typography>
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  ml: 4, 
+                  mb: 2,
+                  color: 'text.secondary',
+                  transition: 'color 0.3s ease'
+                }}
+              >
+                Install based on the module you need:
+              </Typography>
+              <List sx={{ ml: 4 }}>
+                {optionalRepos.map((repo) => (
+                  <ListItem key={repo.name}>
+                    <ListItemIcon>
+                      <RadioButtonUnchecked color="primary" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Typography variant="subtitle1" color="primary">
+                            {repo.name}
+                          </Typography>
+                          <Chip 
+                            label="Optional" 
+                            size="small" 
+                            variant="outlined" 
+                            color="primary"
+                            sx={{ 
+                              height: 20,
+                              borderColor: theme.palette.mode === 'dark' ? 'primary.light' : 'primary.main',
+                            }}
+                          />
+                        </Box>
+                      }
+                      secondary={
+                        <Typography 
+                          variant="body2" 
+                          sx={{ color: 'text.secondary' }}
+                        >
+                          {repo.description}
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
 
             {/* Libraries Section */}
-            <Grid item xs={12}>
-              <Paper elevation={3} sx={{ p: 3, backgroundColor: 'white' }}>
-                <Typography 
-                  variant="h6" 
-                  gutterBottom 
-                  color="primary"
-                  sx={{ 
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1
-                  }}
-                >
-                  <Build />
-                  Libraries and Tools
-                </Typography>
-                <List sx={{ ml: 4 }}>
-                  {libraries.map((lib) => (
-                    <ListItem key={lib.name}>
-                      <ListItemIcon>
-                        <Architecture color="primary" />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Typography variant="subtitle1" color="primary">
-                            {lib.name}
-                          </Typography>
-                        }
-                        secondary={lib.description}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            </Grid>
-          </Grid>
+            <Paper elevation={3} sx={{ 
+              p: 3, 
+              bgcolor: 'background.default',
+              transition: 'all 0.3s ease'
+            }}>
+              <Typography 
+                variant="h6" 
+                gutterBottom 
+                color="primary"
+                sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1
+                }}
+              >
+                <Build />
+                Libraries and Tools
+              </Typography>
+              <List sx={{ ml: 4 }}>
+                {libraries.map((lib) => (
+                  <ListItem key={lib.name}>
+                    <ListItemIcon>
+                      <Architecture color="primary" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="subtitle1" color="primary">
+                          {lib.name}
+                        </Typography>
+                      }
+                      secondary={
+                        <Typography 
+                          variant="body2" 
+                          sx={{ color: 'text.secondary' }}
+                        >
+                          {lib.description}
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+          </Box>
         </CardContent>
       </Card>
     </Box>

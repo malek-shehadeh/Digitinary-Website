@@ -1,28 +1,29 @@
-// sidebar.scss
+
+//src/components/Sidebar/Sidebar.scss
 @use "sass:color";
-@use "../../styles/variables.scss" as vars;
+@use "../../styles/variables" as *;
 
 .sidebar {
-  position: relative;
+  position: fixed; // Changed from relative to fixed
   z-index: 10;
   transition: all 0.3s ease-in-out;
   flex-shrink: 0;
   height: 100vh;
-  overflow-y: auto;
-  background-color: vars.$background-color;
-  border-right: 1px solid vars.$border-color;
-
+  background-color: var(--paper-background);
+  border-right: 1px solid var(--border-color);
+  overflow-x: hidden; // Prevent horizontal scroll
+  
   &.open {
     width: 256px;
   }
-
+  
   &.closed {
     width: 80px;
   }
 
   .sidebar-content {
     height: 100%;
-    padding: vars.$spacing-md;
+    padding: $spacing-md;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -32,73 +33,142 @@
       right: -12px;
       top: 50%;
       transform: translateY(-50%);
-      background-color: vars.$background-color;
-      border: 2px solid #e5e7eb;
+      background-color: var(--paper-background);
+      border: 2px solid var(--border-color);
       border-radius: 9999px;
       padding: 0.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.2s;
-
+      transition: all 0.2s ease-in-out;
+      z-index: 20;
+      
       &:hover {
         transform: translateY(-50%) scale(1.1);
-      }
-
-      svg {
-        width: 16px;
-        height: 16px;
-        color: vars.$primary-color;
+        background-color: var(--hover-bg);
       }
     }
 
-    .sidebar-image {
-      margin-top: vars.$spacing-md;
-      text-align: center;
-      overflow: hidden;
-
-      img {
+    .logo-container {
+      margin-bottom: $spacing-lg;
+      
+      .logo-image {
         max-width: 100%;
-        max-height: 150px;
-        object-fit: contain;
-        border-radius: 8px;
-        transition: transform 0.2s ease-in-out;
+        height: auto;
+        transition: all 0.2s ease-in-out;
       }
     }
 
-    nav {
-      margin-top: vars.$spacing-lg;
+    .navigation {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto; // Enable scroll for navigation
+      overflow-x: hidden; // Prevent horizontal scroll
+      margin-right: -#{$spacing-md}; // Compensate for padding
+      padding-right: $spacing-md; // Add padding back
+
+      .nav-item-wrapper {
+        margin-bottom: $spacing-sm;
+      }
 
       .nav-item {
         display: flex;
         align-items: center;
-        padding: vars.$spacing-md;
+        padding: $spacing-md;
         font-size: 0.875rem;
         font-weight: 500;
         border-radius: 0.5rem;
-        transition: background-color 0.2s;
-        margin-bottom: vars.$spacing-sm;
+        transition: background-color 0.2s ease-in-out;
+        cursor: pointer;
+        text-decoration: none;
+        white-space: nowrap;
 
         &:hover {
-          background-color: vars.$hover-bg;
+          background-color: var(--hover-bg);
         }
 
-        .icon {
+        .item-icon {
+          width: 20px;
+          height: 20px;
           min-width: 20px;
         }
 
-        .nav-text {
-          margin-left: vars.$spacing-md;
+        .item-text {
+          margin-left: $spacing-md;
+          transition: color 0.2s ease-in-out;
+        }
+
+        .arrow-icon {
+          margin-left: auto;
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .subitems {
+        margin-left: calc($spacing-lg + 20px);
+        
+        .subitem {
+          display: block;
+          padding: $spacing-sm;
+          text-decoration: none;
+          font-size: 0.875rem;
+          border-radius: 0.5rem;
+          transition: all 0.2s ease-in-out;
           white-space: nowrap;
-          &:nth-child(odd) {
-            color: vars.$primary-color;
-          }
-          &:nth-child(even) {
-            color: vars.$secondary-color;
+
+          &:hover {
+            background-color: var(--hover-bg);
           }
         }
+      }
+
+      // Scrollbar styling for navigation
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: var(--hover-bg);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--text-secondary);
+        border-radius: 3px;
+
+        &:hover {
+          background: var(--text-color);
+        }
+      }
+    }
+
+    .theme-toggle {
+      padding: $spacing-md;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      margin-top: $spacing-md;
+      border: none;
+
+      &:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .theme-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--primary-color);
+      }
+
+      .theme-text {
+        margin-left: $spacing-md;
+        color: var(--text-color);
+        font-size: 0.875rem;
       }
     }
   }
