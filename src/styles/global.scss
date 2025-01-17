@@ -1,0 +1,106 @@
+// // global.scss
+// // CSS Reset
+
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+// }
+
+// // Global Styles
+// body {
+//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+//     "Helvetica Neue", Arial, sans-serif;
+//   background-color: #ffffff; // Changed from #1a1a1a to white
+//   color: #333333;
+//   line-height: 1.6;
+// }
+
+// // Typography
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin: 0;
+//   font-weight: 600;
+// }
+
+// a {
+//   color: inherit;
+//   text-decoration: none;
+// }
+
+// button {
+//   cursor: pointer;
+//   border: none;
+//   background: none;
+// }
+
+// // Layout
+// .app-container {
+//   display: flex;
+//   min-height: 100vh;
+//   background-color: #ffffff;
+// }
+
+// .main-content {
+//   flex: 1;
+//   padding: 1rem;
+//   overflow-y: auto;
+//   background-color: #ffffff;
+// }
+////
+///
+// Global Styles
+// global.scss
+// CSS Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff; // Changed from #1a1a1a to white
+  color: #333333;
+  line-height: 1.6;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+// Layout
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
