@@ -1,9 +1,4 @@
 
-
-///////////////////////////////////////////////تول توبببب
-
-
-//src/components/Sidebar/Sidebar.tsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -19,7 +14,7 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import "./Sidebar.scss";
 
 interface SidebarItem {
@@ -59,20 +54,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
   const toggleSubMenu = (itemName: string) => {
     setExpandedItem(expandedItem === itemName ? null : itemName);
   };
-  const renderThemeToggle = () => (
-    <button onClick={toggleTheme} className="nav-item theme-toggle">
-      {mode === 'dark' ? (
-        <Sun className="item-icon" style={{ color: "#4068DF" }} />
-      ) : (
-        <Moon className="item-icon" style={{ color: "#4068DF" }} />
-      )}
-      {isOpen && (
-        <span className="item-text" style={{ color: "#4068DF" }}>
-          {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
-        </span>
-      )}
-    </button>
-  );
 
   return (
     <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
@@ -164,10 +145,29 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
               )}
             </div>
           ))}
-          
-          {/* Add theme toggle at the end of navigation */}
+
           <div className="nav-item-wrapper">
-            {renderThemeToggle()}
+            <button onClick={toggleTheme} className="nav-item">
+              {mode === 'dark' ? (
+                <Sun 
+                  className="item-icon"
+                  style={{ color: "#42c9c2" }}
+                />
+              ) : (
+                <Moon 
+                  className="item-icon"
+                  style={{ color: "#42c9c2" }}
+                />
+              )}
+              {isOpen && (
+                <span
+                  className="item-text"
+                  style={{ color: "#42c9c2" }}
+                >
+                  {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                </span>
+              )}
+            </button>
           </div>
         </nav>
       </div>
