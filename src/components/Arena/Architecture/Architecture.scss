@@ -1,0 +1,85 @@
+//src/components/Arena/Architecture/Architecture.scss
+@use "sass:color";
+@use "../../../styles/variables" as *;
+
+.architecture-container {
+  padding: $spacing-lg;
+  
+  .section-card {
+    background-color: var(--paper-background);
+    transition: background-color 0.3s ease;
+    margin-bottom: $spacing-lg;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .section-container {
+    display: grid;
+    gap: $spacing-lg;
+  }
+
+  .section-paper {
+    padding: $spacing-lg;
+    background-color: var(--background-default);
+    transition: all 0.3s ease;
+  }
+
+  .section-content {
+    margin-left: $spacing-lg;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+
+  .resources-list {
+    margin-left: $spacing-lg;
+
+    .resource-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--primary-light);
+      }
+    }
+  }
+
+  .image-container {
+    margin-left: $spacing-lg;
+    margin-top: $spacing-md;
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    background-color: var(--hover-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $spacing-sm;
+    transition: background-color 0.3s ease;
+
+    .content-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: $breakpoint-md) {
+  .architecture-container {
+    padding: $spacing-md;
+
+    .section-paper {
+      padding: $spacing-md;
+    }
+
+    .section-content,
+    .resources-list,
+    .image-container {
+      margin-left: $spacing-md;
+    }
+  }
+}
