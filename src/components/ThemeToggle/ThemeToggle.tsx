@@ -2,7 +2,7 @@
 import React from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 
 interface ThemeToggleProps {
   className?: string;
