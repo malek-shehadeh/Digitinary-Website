@@ -2,11 +2,11 @@
 // src/components/D-gate/D-gate.tsx
 import React, { useState } from "react";
 import ProgressStepper from "../ProgressStepper/ProgressStepper";
-import ArchitectureStep from "./ArchitectureStep";
-import BusinessRequirements from "./BusinessRequirements";
-import TechnicalSetup from "./TechnicalSetup";
-import DeploymentProcess from "./DeploymentProcess";
-import CustomModule from "./CustomModule";
+import ArchitectureStep from "./Architecture/ArchitectureStep";
+import BusinessRequirements from "./BusinessRequirements/BusinessRequirements";
+import TechnicalSetup from "./TechnicalSetup/TechnicalSetup";
+import DeploymentProcess from "./DeploymentProcess/DeploymentProcess";
+import CustomModule from "./CustomModule/CustomModule";
 import "./Arena.scss";
 
 interface DGatePageProps {
@@ -27,18 +27,20 @@ const DGatePage: React.FC<DGatePageProps> = ({ isSidebarOpen }) => {
   const renderStepContent = () => {
     switch (activeStep) {
       case 0:
-        return <ArchitectureStep isSidebarOpen={isSidebarOpen} />;
+        return <ArchitectureStep />;
       case 1:
-        return <BusinessRequirements isSidebarOpen={isSidebarOpen} />;
+        return <BusinessRequirements />;
       case 2:
-        return <TechnicalSetup isSidebarOpen={isSidebarOpen} />;
-      case 3:
-        return <DeploymentProcess isSidebarOpen={isSidebarOpen} />;
+        return <TechnicalSetup />;
+      // In renderStepContent()
+case 3:
+  return <DeploymentProcess isSidebarOpen={isSidebarOpen} />;
       case 4:
         return <CustomModule isSidebarOpen={isSidebarOpen} />;
       default:
         return <div>Step {activeStep + 1} content coming soon...</div>;
     }
+  
   };
 
   return (

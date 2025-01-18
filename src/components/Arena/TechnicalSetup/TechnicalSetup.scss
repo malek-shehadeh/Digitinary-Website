@@ -1,0 +1,102 @@
+//src/components/Arena/TechnicalSetup/TechnicalSetup.scss
+@use "sass:color";
+@use "../../../styles/variables" as *;
+
+.technical-setup {
+  padding: $spacing-lg;
+
+  .main-card {
+    background-color: var(--paper-background);
+    transition: background-color 0.3s ease;
+  }
+
+  .content-container {
+    display: grid;
+    gap: $spacing-lg;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    gap: $spacing-sm;
+
+    &.h4 {
+      gap: $spacing-md;
+    }
+  }
+
+  .section-paper {
+    padding: $spacing-lg;
+    background-color: var(--background-default);
+    transition: all 0.3s ease;
+  }
+
+  .section-content {
+    margin-left: $spacing-lg;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+
+  .section-description {
+    margin-left: $spacing-lg;
+    margin-bottom: $spacing-md;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    font-size: 0.875rem;
+  }
+
+  .repository-list,
+  .library-list {
+    margin-left: $spacing-lg;
+  }
+
+  .repository-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  .repository-name,
+  .library-name {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+
+  .repository-description,
+  .library-description {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .repository-chip {
+    height: 20px;
+
+    &.required {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    &.optional {
+      border-color: var(--primary-color);
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: $breakpoint-md) {
+  .technical-setup {
+    padding: $spacing-md;
+
+    .section-paper {
+      padding: $spacing-md;
+    }
+
+    .section-content,
+    .section-description,
+    .repository-list,
+    .library-list {
+      margin-left: $spacing-md;
+    }
+  }
+}
