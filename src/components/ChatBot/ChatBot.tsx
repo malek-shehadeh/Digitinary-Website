@@ -48,7 +48,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      // Send greeting message when chat is opened
       const greeting = chatbotResponses.greeting;
       const greetingMessage: Message = {
         id: uuidv4(),
@@ -59,7 +58,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
       };
       setMessages([greetingMessage]);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
 
   useEffect(() => {
     scrollToBottom();

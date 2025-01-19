@@ -41,13 +41,14 @@ const MicroFrontend: React.FC = () => (
           icon={Architecture}
           title="Structure"
         >
-          <Box className="image-container">
-            <img
-              src="/api/placeholder/600/300"
-              alt="Architecture Diagram"
-              className="content-image"
-            />
-          </Box>
+       <Box className="image-container">
+  <img
+    src="/image.png"
+    alt="Architecture Diagram"
+    className="content-image"
+  />
+</Box>
+
         </SectionContent>
       </Box>
     </CardContent>
