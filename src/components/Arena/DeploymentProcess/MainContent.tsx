@@ -52,11 +52,13 @@ const MainContent: React.FC = () => {
             <SectionHeader icon={Timeline} title="Deployment Flow" />
             <Box className="diagram-container">
               <img
-                src="/api/placeholder/800/300"
+                src="/image (1).png"
                 alt="Deployment Flow"
                 className="flow-diagram"
               />
             </Box>
+
+            
           </Paper>
 
           {/* Process Stepper Section */}
