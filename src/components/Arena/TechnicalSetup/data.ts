@@ -1,4 +1,3 @@
-//src/components/Arena/TechnicalSetup/data.ts
 export const requiredRepos = [
     {
       name: 'container',

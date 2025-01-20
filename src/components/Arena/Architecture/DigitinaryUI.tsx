@@ -1,4 +1,3 @@
-//src/components/Arena/Architecture/DigitinaryUI.tsx
 import React from 'react';
 import { Card, CardContent, Box } from '@mui/material';
 import { LibraryBooks, Article } from '@mui/icons-material';

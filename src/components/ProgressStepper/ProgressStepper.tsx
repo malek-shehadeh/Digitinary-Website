@@ -1,14 +1,27 @@
 
+
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import StepValidation from "../Arena/StepValidation";
+import {
+  ArrowRight,
+  ArrowLeft,
+  SkipForward,
+  ClipboardList,
+  PackageCheck,
+  FileCheck,
+  Book,
+  Award,
+  AlertCircle,
+} from "lucide-react";
 import "./ProgressStepper.scss";
+
+import { StepIconProps } from "@mui/material/StepIcon";
 
 interface ProgressStepperProps {
   steps: {
@@ -20,14 +33,15 @@ interface ProgressStepperProps {
   onStepChange: (step: number) => void;
 }
 
-const ProgressStepper: React.FC<ProgressStepperProps> = ({ 
-  steps, 
+const ProgressStepper: React.FC<ProgressStepperProps> = ({
+  steps,
   activeStep,
-  onStepChange 
+  onStepChange,
 }) => {
   const navigate = useNavigate();
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const [showValidation, setShowValidation] = React.useState(false);
+  const [hoveredStep, setHoveredStep] = React.useState<number | null>(null);
 
   const isStepOptional = (step: number) => {
     return steps[step]?.optional || false;
@@ -39,8 +53,7 @@ const ProgressStepper: React.FC<ProgressStepperProps> = ({
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      // If it's the last step, navigate to home page
-      navigate('/');
+      navigate("/");
     } else {
       setShowValidation(true);
     }
@@ -62,11 +75,6 @@ const ProgressStepper: React.FC<ProgressStepperProps> = ({
     });
   };
 
-  const handleReset = () => {
-    onStepChange(0);
-    setSkipped(new Set<number>());
-  };
-
   const handleValidationComplete = (success: boolean) => {
     if (success) {
       let newSkipped = skipped;
@@ -80,16 +88,39 @@ const ProgressStepper: React.FC<ProgressStepperProps> = ({
     setShowValidation(false);
   };
 
+  const getStepIcon = (index: number) => {
+    const icons = {
+      0: ClipboardList,
+      1: PackageCheck,
+      2: FileCheck,
+      3: Book,
+      4: Award,
+    };
+    return icons[index as keyof typeof icons] || ClipboardList;
+  };
+
+  const StepIcon: React.FC<StepIconProps> = ({ active, completed, icon }) => {
+    const IconComponent = getStepIcon(Number(icon) - 1);
+    return (
+      <IconComponent
+        className={`step-icon ${active ? "active" : ""} ${completed ? "completed" : ""}`}
+      />
+    );
+  };
+
   return (
     <Box className="progress-stepper-container">
       <Stepper activeStep={activeStep} className="stepper">
-        {steps.map(({ title, optional }, index) => {
+        {steps.map((step, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: { optional?: React.ReactNode } = {};
 
-          if (optional) {
+          if (step.optional) {
             labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
+              <div className="optional-label">
+                <AlertCircle className="optional-icon" />
+                <Typography variant="caption">Optional</Typography>
+              </div>
             );
           }
 
@@ -98,53 +129,57 @@ const ProgressStepper: React.FC<ProgressStepperProps> = ({
           }
 
           return (
-            <Step key={title} {...stepProps}>
-              <StepLabel {...labelProps}>{title}</StepLabel>
+            <Step
+              key={step.id}
+              {...stepProps}
+              className={`step-item ${hoveredStep === index ? "hovered" : ""}`}
+              onMouseEnter={() => setHoveredStep(index)}
+              onMouseLeave={() => setHoveredStep(null)}
+            >
+              <StepLabel
+                StepIconComponent={StepIcon} // Use the custom StepIcon
+                {...labelProps}
+                className={index < activeStep ? "completed" : ""}
+              >
+                <div className="step-content">
+                  <Typography className="step-title">{step.title}</Typography>
+                  <Typography className="step-description">
+                    {index < activeStep
+                      ? "Completed"
+                      : index === activeStep
+                      ? "In Progress"
+                      : "Pending"}
+                  </Typography>
+                </div>
+              </StepLabel>
             </Step>
           );
         })}
       </Stepper>
 
-      <div className="stepper-content">
-        {activeStep === steps.length ? (
-          <>
-            <Typography className="step-text">
-              All steps completed - you're finished
-            </Typography>
-            <Box className="button-container">
-              <Box className="spacer" />
-              <Button onClick={() => navigate('/')} variant="contained">
-                Go to Home
-              </Button>
-            </Box>
-          </>
-        ) : (
-          <>
-            <Box className="button-container">
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className="back-button"
-              >
-                Back
-              </Button>
-              <Box className="spacer" />
-              {isStepOptional(activeStep) && (
-                <Button
-                  color="inherit"
-                  onClick={handleSkip}
-                  className="skip-button"
-                >
-                  Skip
-                </Button>
-              )}
-              <Button onClick={handleNext} variant="contained">
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
-            </Box>
-          </>
-        )}
+      <div className="button-container">
+        <button
+          onClick={handleBack}
+          disabled={activeStep === 0}
+          className={`custom-button back-button ${activeStep === 0 ? "disabled" : ""}`}
+        >
+          <ArrowLeft className="button-icon" />
+          Back
+        </button>
+
+        <div className="button-group-right">
+          {isStepOptional(activeStep) && (
+            <button onClick={handleSkip} className="custom-button skip-button">
+              <SkipForward className="button-icon" />
+              Skip
+            </button>
+          )}
+
+          <button onClick={handleNext} className="custom-button next-button">
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            <ArrowRight className="button-icon" />
+          </button>
+        </div>
       </div>
 
       <StepValidation

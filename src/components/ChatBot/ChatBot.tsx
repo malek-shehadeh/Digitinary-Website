@@ -1,8 +1,7 @@
-//src/components/ChatBot/ChatBot.tsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Box,
   Paper,
   IconButton,
   Typography,
@@ -19,17 +18,16 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 import ChatMessage from './ChatMessage';
-import ChatInput from './ChatInput';
 import { Message, ChatBotProps, QuickReply } from './types';
 import { 
   chatbotResponses, 
   navigationMap, 
-  findResponseByKeywords, 
   getDefaultResponse 
 } from './chatbotLogic';
 
+import './chatbot.scss';
+
 const ChatBot: React.FC<ChatBotProps> = ({
-  onSendMessage,
   isOpen: propIsOpen,
   onClose,
 }) => {
@@ -76,40 +74,12 @@ const ChatBot: React.FC<ChatBotProps> = ({
     }
   };
 
-  const handleSendMessage = (content: string) => {
-    const userMessage: Message = {
-      id: uuidv4(),
-      content,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-    setMessages(prev => [...prev, userMessage]);
-    onSendMessage?.(content);
-
-    // Find appropriate response
-    const response = findResponseByKeywords(content) || getDefaultResponse();
-    
-    const botMessage: Message = {
-      id: uuidv4(),
-      content: response.content,
-      sender: 'bot',
-      timestamp: new Date(),
-      quickReplies: response.quickReplies,
-    };
-
-    setTimeout(() => {
-      setMessages(prev => [...prev, botMessage]);
-    }, 500);
-  };
-
   const handleQuickReplyClick = (reply: QuickReply) => {
-    // Handle navigation actions
     if (reply.action.startsWith('navigate_')) {
       handleNavigation(reply.action);
       return;
     }
 
-    // Add user message for the quick reply
     const userMessage: Message = {
       id: uuidv4(),
       content: reply.text,
@@ -118,7 +88,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
     };
     setMessages(prev => [...prev, userMessage]);
 
-    // Get bot response for the action
     const response = chatbotResponses[reply.action] || getDefaultResponse();
     const botMessage: Message = {
       id: uuidv4(),
@@ -143,43 +112,18 @@ const ChatBot: React.FC<ChatBotProps> = ({
   };
 
   const chatContent = (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        width: isMobile ? '100%' : '400px',
-      }}
-    >
-      {/* Header */}
-      <Box
-        sx={{
-          p: 2,
-          bgcolor: 'primary.main',
-          color: 'white',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <SmartToy />
-          <Typography variant="h6">Chat Assistant</Typography>
-        </Box>
-        <IconButton onClick={handleClose} sx={{ color: 'white' }}>
+    <div className="chatbot-content">
+      <div className="chatbot-header">
+        <div className="chatbot-header-title">
+          <SmartToy className="icon" />
+          <Typography variant="h6">Digitinary Chat</Typography>
+        </div>
+        <IconButton onClick={handleClose} className="close-button">
           <Close />
         </IconButton>
-      </Box>
+      </div>
 
-      {/* Messages */}
-      <Box
-        sx={{
-          flex: 1,
-          overflow: 'auto',
-          p: 2,
-          bgcolor: 'background.default',
-        }}
-      >
+      <div className="chatbot-messages">
         {messages.map((message) => (
           <ChatMessage
             key={message.id}
@@ -188,35 +132,20 @@ const ChatBot: React.FC<ChatBotProps> = ({
           />
         ))}
         <div ref={messagesEndRef} />
-      </Box>
-
-      {/* Input */}
-      <ChatInput onSendMessage={handleSendMessage} />
-    </Box>
+      </div>
+    </div>
   );
 
   return (
     <>
       {!isMobile ? (
-        <Paper
-          sx={{
-            position: 'fixed',
-            bottom: 20,
-            right: 20,
-            width: isOpen ? 400 : 'auto',
-            height: isOpen ? 600 : 'auto',
-            overflow: 'hidden',
-            transition: 'all 0.3s ease',
-            zIndex: 1000,
-          }}
-        >
+        <Paper className={`chatbot-container ${isOpen ? 'open' : ''}`}>
           {isOpen ? (
             chatContent
           ) : (
             <Fab
-              color="primary"
+              className="chatbot-fab"
               onClick={toggleChat}
-              sx={{ m: 1 }}
             >
               <ChatBubble />
             </Fab>
@@ -236,7 +165,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
           </Drawer>
           {!isOpen && (
             <Fab
-              color="primary"
+              className="chatbot-fab"
               onClick={toggleChat}
               sx={{
                 position: 'fixed',
@@ -255,6 +184,3 @@ const ChatBot: React.FC<ChatBotProps> = ({
 };
 
 export default ChatBot;
-
-
-////

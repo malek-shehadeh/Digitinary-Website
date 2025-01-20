@@ -1,5 +1,4 @@
 
-//src/components/Arena/DeploymentProcess/data.ts
 export const environments = [
     {
       name: 'Develop',

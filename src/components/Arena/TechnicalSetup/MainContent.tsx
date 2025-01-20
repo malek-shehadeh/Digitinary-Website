@@ -1,4 +1,3 @@
-//src/components/Arena/TechnicalSetup/MainContent.tsx
 import React from 'react';
 import { Card, CardContent, Paper, Box, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Code, Description, Storage, GitHub, Build, Architecture } from '@mui/icons-material';

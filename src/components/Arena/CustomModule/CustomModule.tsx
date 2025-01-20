@@ -1,6 +1,4 @@
-//src/components/Arena/CustomModule/CustomModule.tsx
 import React from 'react';
-// import { Box } from '@mui/material';
 import MainContent from './MainContent';
 import './CustomModule.scss';
 

@@ -1,5 +1,4 @@
 
-// src/components/D-gate/D-gate.tsx
 import React, { useState } from "react";
 import ProgressStepper from "../ProgressStepper/ProgressStepper";
 import ArchitectureStep from "./Architecture/ArchitectureStep";
@@ -18,7 +17,7 @@ const DGatePage: React.FC<DGatePageProps> = ({ isSidebarOpen }) => {
   
   const steps = [
     { title: "Step 1: Initialize", id: "step1" },
-    { title: "Step 2: Configure", id: "step2", optional: true },
+    { title: "Step 2: Configure", id: "step2" },
     { title: "Step 3: Technical Setup", id: "step3" },
     { title: "Step 4: Deployment", id: "step4" },
     { title: "Step 5: Custom Module", id: "step5" },
@@ -32,7 +31,6 @@ const DGatePage: React.FC<DGatePageProps> = ({ isSidebarOpen }) => {
         return <BusinessRequirements />;
       case 2:
         return <TechnicalSetup />;
-      // In renderStepContent()
 case 3:
   return <DeploymentProcess isSidebarOpen={isSidebarOpen} />;
       case 4:

@@ -1,7 +1,6 @@
 
 
 
-//src/components/Arena/DeploymentProcess/EnvironmentCards.tsx
 import React from 'react';
 import { Paper, Box, Typography } from '@mui/material';
 import { DeveloperMode, BugReport, Visibility } from '@mui/icons-material';

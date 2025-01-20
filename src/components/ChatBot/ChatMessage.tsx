@@ -1,6 +1,7 @@
-//src/components/ChatBot/ChatMessage.tsx
+
+
 import React from 'react';
-import { Box, Typography, Paper, Chip } from '@mui/material';
+import { Typography } from '@mui/material';
 import { SmartToy, Person } from '@mui/icons-material';
 import { Message, QuickReply } from './types';
 
@@ -13,81 +14,35 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onQuickReplyClick })
   const isBot = message.sender === 'bot';
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: isBot ? 'flex-start' : 'flex-end',
-        mb: 2,
-      }}
-    >
-      <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 1 }}>
+    <div className="chatbot-message">
+      <div className="chatbot-message-content">
         {isBot && (
-          <SmartToy
-            sx={{
-              bgcolor: 'primary.main',
-              color: 'white',
-              p: 0.5,
-              borderRadius: '50%',
-              width: 32,
-              height: 32,
-            }}
-          />
+          <SmartToy className="chatbot-message-avatar" />
         )}
-        <Paper
-          sx={{
-            p: 2,
-            backgroundColor: isBot ? 'grey.100' : 'primary.main',
-            color: isBot ? 'text.primary' : 'white',
-            maxWidth: '70%',
-            borderRadius: 2,
-            boxShadow: 1,
-          }}
-        >
+        <div className={`chatbot-message-bubble ${isBot ? 'bot' : 'user'}`}>
           <Typography variant="body1">{message.content}</Typography>
-        </Paper>
+        </div>
         {!isBot && (
-          <Person
-            sx={{
-              bgcolor: 'primary.main',
-              color: 'white',
-              p: 0.5,
-              borderRadius: '50%',
-              width: 32,
-              height: 32,
-            }}
-          />
+          <Person className="chatbot-message-avatar" />
         )}
-      </Box>
+      </div>
 
       {message.quickReplies && (
-        <Box sx={{ 
-          display: 'flex', 
-          gap: 1, 
-          mt: 1, 
-          flexWrap: 'wrap',
-          justifyContent: isBot ? 'flex-start' : 'flex-end',
-          maxWidth: '90%'
+        <div className="chatbot-quick-replies" style={{ 
+          justifyContent: isBot ? 'flex-start' : 'flex-end' 
         }}>
           {message.quickReplies.map((reply) => (
-            <Chip
+            <div
               key={reply.id}
-              label={reply.text}
+              className="chatbot-quick-replies-chip"
               onClick={() => onQuickReplyClick?.(reply)}
-              sx={{
-                cursor: 'pointer',
-                bgcolor: 'background.paper',
-                '&:hover': {
-                  bgcolor: 'primary.light',
-                  color: 'white',
-                },
-                transition: 'all 0.2s ease-in-out',
-              }}
-            />
+            >
+              {reply.text}
+            </div>
           ))}
-        </Box>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };
 

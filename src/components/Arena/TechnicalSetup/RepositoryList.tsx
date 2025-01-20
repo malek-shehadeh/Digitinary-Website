@@ -1,6 +1,5 @@
-//src/components/Arena/TechnicalSetup/RepositoryList.tsx
 import React from 'react';
-import { 
+import {
   Paper,
   Typography,
   List,
@@ -15,6 +14,7 @@ import {
   RadioButtonUnchecked,
 } from '@mui/icons-material';
 import SectionHeader from './SectionHeader';
+import { SvgIconComponent } from '@mui/icons-material'; 
 
 interface Repository {
   name: string;
@@ -23,7 +23,7 @@ interface Repository {
 
 interface RepositoryListProps {
   title: string;
-  icon: any;
+  icon: SvgIconComponent; 
   repositories: Repository[];
   type: 'required' | 'optional';
   description?: string;

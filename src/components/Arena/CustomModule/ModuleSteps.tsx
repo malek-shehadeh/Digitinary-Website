@@ -1,4 +1,3 @@
-//src/components/Arena/CustomModule/ModuleSteps.tsx
 import React from 'react';
 import {
   Typography,

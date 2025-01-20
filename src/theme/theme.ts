@@ -1,4 +1,3 @@
-//src/theme/theme.ts
 import { createTheme, Theme } from '@mui/material/styles';
 
 // Define theme variables that will change with mode

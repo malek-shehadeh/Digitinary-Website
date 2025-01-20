@@ -1,5 +1,4 @@
 
-// App.tsx
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -8,10 +7,14 @@ import Arena from "./components/Arena/Arena";
 import Knetpage from "./components/K-net/K-net";
 import "./styles/global.scss";
 import ChatBot from "./components/ChatBot/ChatBot";
-import { ThemeProvider } from './context/ThemeContext'; // Add this import
+import { ThemeProvider } from './context/ThemeContext'; 
+import AuthForm from "./components/AuthForm/AuthForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAuthFormOpen, setIsAuthFormOpen] = useState(true); 
 
   return (
     <ThemeProvider>
@@ -27,6 +30,15 @@ const App = () => {
         >
           <Routes>
             <Route
+              path="/signin"
+              element={
+                <AuthForm
+                  isOpen={isAuthFormOpen} 
+                  onClose={() => setIsAuthFormOpen(false)} 
+                />
+              }
+            />
+            <Route
               path="/frontend/DGatePage"
               element={<DGatePage isSidebarOpen={isSidebarOpen} />}
             />
@@ -41,6 +53,7 @@ const App = () => {
           </Routes>
         </main>
         <ChatBot />
+        <ToastContainer />
       </div>
     </ThemeProvider>
   );

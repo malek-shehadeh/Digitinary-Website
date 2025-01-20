@@ -1,4 +1,3 @@
-// src/context/ThemeContext.tsx
 import React from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { createAppTheme } from '../theme/theme';

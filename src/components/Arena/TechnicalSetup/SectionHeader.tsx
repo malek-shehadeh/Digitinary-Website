@@ -1,4 +1,3 @@
-//src/components/Arena/TechnicalSetup/SectionHeader.tsx
 import React from 'react';
 import { Typography } from '@mui/material';
 import { SvgIconComponent } from '@mui/icons-material';
