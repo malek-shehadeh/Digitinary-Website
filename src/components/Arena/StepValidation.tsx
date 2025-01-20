@@ -1,7 +1,5 @@
 
 
-
-// src/components/D-gate/StepValidation.tsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -9,7 +7,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
   Radio,
   RadioGroup,
   FormControlLabel,
@@ -17,10 +14,8 @@ import {
   Typography,
   Alert,
 } from '@mui/material';
-import {
-  QuizOutlined,
-  WarningAmber
-} from '@mui/icons-material';
+import { QuizOutlined, WarningAmber } from '@mui/icons-material';
+import CustomButton from '../ui/Button'; 
 
 interface WarningDialogProps {
   open: boolean;
@@ -46,8 +41,8 @@ const WarningDialog: React.FC<WarningDialogProps> = ({ open, onClose }) => {
   };
 
   return (
-    <Dialog 
-      open={open} 
+    <Dialog
+      open={open}
       onClose={onClose}
       maxWidth="sm"
       fullWidth
@@ -55,16 +50,18 @@ const WarningDialog: React.FC<WarningDialogProps> = ({ open, onClose }) => {
         sx: {
           borderRadius: 2,
           boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-        }
+        },
       }}
     >
-      <DialogTitle sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: 1,
-        backgroundColor: '#fff3e0',
-        color: '#ed6c02'
-      }}>
+      <DialogTitle
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+          backgroundColor: '#fff3e0',
+          color: '#ed6c02',
+        }}
+      >
         <WarningAmber color="warning" />
         <Typography variant="h6" component="span">
           Review Required
@@ -76,14 +73,14 @@ const WarningDialog: React.FC<WarningDialogProps> = ({ open, onClose }) => {
         </Typography>
       </DialogContent>
       <DialogActions sx={{ p: 2, borderTop: '1px solid #e0e0e0' }}>
-        <Button 
+        <CustomButton
           onClick={handleRedirect}
           variant="contained"
           color="warning"
-          fullWidth
+          fullWidth 
         >
           Return to Main Page
-        </Button>
+        </CustomButton>
       </DialogActions>
     </Dialog>
   );
@@ -118,60 +115,45 @@ const StepValidation: React.FC<StepValidationProps> = ({
 
   const questionsByStep: QuestionMap = {
     0: {
-      question: "What is the main advantage of micro-frontend architecture?",
+      question: 'What is the main advantage of micro-frontend architecture?',
       options: [
-        "Independent teams can work on specific modules",
-        "It requires more server resources",
-        "It makes the application slower",
-        "It requires more documentation"
+        'Independent teams can work on specific modules',
+        'It requires more server resources',
+        'It makes the application slower',
+        'It requires more documentation',
       ],
-      correctAnswer: "Independent teams can work on specific modules"
+      correctAnswer: 'Independent teams can work on specific modules',
     },
     1: {
-      question: "What is the primary purpose of Business Requirements?",
+      question: 'What is the primary purpose of Business Requirements?',
       options: [
-        "To make the application look better",
-        "To define key objectives and goals",
-        "To write more code",
-        "To deploy faster"
+        'To make the application look better',
+        'To define key objectives and goals',
+        'To write more code',
+        'To deploy faster',
       ],
-      correctAnswer: "To define key objectives and goals"
+      correctAnswer: 'To define key objectives and goals',
     },
     2: {
-      question: "Which repository is required for the core container?",
-      options: [
-        "user-management",
-        "common-layout",
-        "container",
-        "c360"
-      ],
-      correctAnswer: "container"
+      question: 'Which repository is required for the core container?',
+      options: ['user-management', 'common-layout', 'container', 'c360'],
+      correctAnswer: 'container',
     },
     3: {
-      question: "Which environment is used for QA team verification?",
-      options: [
-        "Production",
-        "Develop",
-        "Test",
-        "Staging"
-      ],
-      correctAnswer: "Test"
+      question: 'Which environment is used for QA team verification?',
+      options: ['Production', 'Develop', 'Test', 'Staging'],
+      correctAnswer: 'Test',
     },
     4: {
-      question: "What is the first step in creating a custom module?",
-      options: [
-        "Import the module",
-        "Configure the module",
-        "Generate the module",
-        "Add components"
-      ],
-      correctAnswer: "Generate the module"
-    }
+      question: 'What is the first step in creating a custom module?',
+      options: ['Import the module', 'Configure the module', 'Generate the module', 'Add components'],
+      correctAnswer: 'Generate the module',
+    },
   };
 
   const handleSubmit = () => {
     const currentQuestion = questionsByStep[currentStep];
-    
+
     if (selectedAnswer === currentQuestion.correctAnswer) {
       onValidationComplete(true);
       setSelectedAnswer('');
@@ -202,27 +184,29 @@ const StepValidation: React.FC<StepValidationProps> = ({
           sx: {
             borderRadius: 2,
             boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          }
+          },
         }}
       >
-        <DialogTitle sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: 1,
-          backgroundColor: '#f8f9fa',
-          borderBottom: '1px solid #e0e0e0'
-        }}>
+        <DialogTitle
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            backgroundColor: '#3d3d3d',
+            borderBottom: '1px solid #e0e0e0',
+          }}
+        >
           <QuizOutlined color="primary" />
           <Typography variant="h6" component="span">
             Step {currentStep + 1} Validation
           </Typography>
         </DialogTitle>
-        
+
         <DialogContent sx={{ mt: 2 }}>
           <Typography variant="body1" color="text.primary" gutterBottom>
             {currentQuestion.question}
           </Typography>
-          
+
           <FormControl component="fieldset" sx={{ width: '100%', mt: 2 }}>
             <RadioGroup
               value={selectedAnswer}
@@ -242,8 +226,8 @@ const StepValidation: React.FC<StepValidationProps> = ({
                     p: 1,
                     borderRadius: 1,
                     '&:hover': {
-                      backgroundColor: '#f5f5f5',
-                    }
+                      backgroundColor: '#4A70E1',
+                    },
                   }}
                 />
               ))}
@@ -258,23 +242,20 @@ const StepValidation: React.FC<StepValidationProps> = ({
         </DialogContent>
 
         <DialogActions sx={{ p: 2, borderTop: '1px solid #e0e0e0' }}>
-          <Button onClick={onClose} color="inherit">
+          <CustomButton onClick={onClose} color="inherit" variant="outlined">
             Cancel
-          </Button>
-          <Button 
+          </CustomButton>
+          <CustomButton
             onClick={handleSubmit}
             variant="contained"
             disabled={!selectedAnswer}
           >
             Submit Answer
-          </Button>
+          </CustomButton>
         </DialogActions>
       </Dialog>
 
-      <WarningDialog 
-        open={showWarning}
-        onClose={() => setShowWarning(false)}
-      />
+      <WarningDialog open={showWarning} onClose={() => setShowWarning(false)} />
     </>
   );
 };

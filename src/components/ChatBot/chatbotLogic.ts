@@ -1,4 +1,3 @@
-//src/components/ChatBot/chatbotLogic.ts
 import { ResponseNode } from './types';
 
 export const chatbotResponses: { [key: string]: ResponseNode } = {
@@ -68,7 +67,7 @@ export const chatbotResponses: { [key: string]: ResponseNode } = {
     ],
   },
   navigation: {
-    content: "You can navigate through the system by:\n1. Using the quick reply buttons\n2. Typing your question\n3. Clicking on project links\n\nWhat would you like to do?",
+    content: "You can navigate through the system by:\n1. Using the quick reply buttons\n2. Clicking on project links\n\nWhat would you like to do?",
     quickReplies: [
       { id: '23', text: 'Show Projects', action: 'greeting' },
       { id: '24', text: 'Get More Help', action: 'help' },
@@ -90,24 +89,6 @@ export const navigationMap: { [key: string]: string } = {
   'navigate_knet': '/frontend/knet',
 };
 
-// Helper function to find response based on keywords
-export const findResponseByKeywords = (message: string): ResponseNode | null => {
-  const normalizedMessage = message.toLowerCase();
-  
-  // Direct project matches
-  if (normalizedMessage.includes('dgate')) return chatbotResponses.dgate;
-  if (normalizedMessage.includes('arena')) return chatbotResponses.arena;
-  if (normalizedMessage.includes('knet')) return chatbotResponses.knet;
-  
-  // Help and navigation matches
-  if (normalizedMessage.includes('help')) return chatbotResponses.help;
-  if (normalizedMessage.includes('navigate')) return chatbotResponses.navigation;
-  if (normalizedMessage.includes('support')) return chatbotResponses.support;
-  
-  // Default response if no match found
-  return null;
-};
-
 // Get default response when no match is found
 export const getDefaultResponse = (): ResponseNode => ({
   content: "I'm not sure I understand. Would you like to:",
@@ -116,4 +97,3 @@ export const getDefaultResponse = (): ResponseNode => ({
     { id: 'default_2', text: 'Get Help', action: 'help' },
   ],
 });
-

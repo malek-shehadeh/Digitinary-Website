@@ -1,4 +1,3 @@
-//src/components/Arena/BusinessRequirements/BusinessRequirements.tsx
 import React from 'react';
 import { Box } from '@mui/material';
 import MainContent from './MainContent';

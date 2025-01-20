@@ -42,14 +42,13 @@
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       z-index: 20;
-      outline: none;  // Added this
+      outline: none; 
       
       &:hover {
         transform: translateY(-50%) scale(1.1);
         background-color: var(--hover-bg);
       }
     
-      // Add these new styles
       &:focus {
         outline: none;
       }
@@ -62,7 +61,6 @@
         border: 0;
       }
     
-      // Optional: if you want to keep the hover effect when focused
       &:focus:hover {
         transform: translateY(-50%) scale(1.1);
         background-color: var(--hover-bg);

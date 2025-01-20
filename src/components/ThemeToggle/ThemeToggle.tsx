@@ -1,4 +1,3 @@
-//src/components/ThemeToggle/ThemeToggle.tsx
 import React from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';

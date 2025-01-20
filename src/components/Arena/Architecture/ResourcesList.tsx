@@ -1,4 +1,3 @@
-//src/components/Arena/Architecture/ResourcesList.tsx
 import React from 'react';
 import { 
   List, 

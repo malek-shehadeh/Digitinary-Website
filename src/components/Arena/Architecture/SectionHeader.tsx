@@ -1,32 +1,31 @@
-//src/components/Arena/Architecture/SectionHeader.tsx
 import React from 'react';
-import { Typography, Box } from '@mui/material';
-import { SvgIconComponent } from '@mui/icons-material';
+import { Typography } from '@mui/material';
+import { SvgIconComponent } from '@mui/icons-material'; 
 
 interface SectionHeaderProps {
-  icon: SvgIconComponent;
+  icon: SvgIconComponent; 
   title: string;
-  variant?: "h4" | "h6";
+  variant?: 'h4' | 'h6';
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ 
-  icon: Icon, 
-  title, 
-  variant = "h6" 
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  icon: Icon,
+  title,
+  variant = 'h6',
 }) => (
   <Typography
     variant={variant}
-    component={variant === "h4" ? "h2" : "h3"}
+    component={variant === 'h4' ? 'h2' : 'h3'}
     gutterBottom
     color="primary"
     sx={{
       fontWeight: 600,
       display: 'flex',
       alignItems: 'center',
-      gap: variant === "h4" ? 2 : 1,
+      gap: variant === 'h4' ? 2 : 1,
     }}
   >
-    <Icon sx={{ fontSize: variant === "h4" ? 32 : 24 }} />
+    <Icon sx={{ fontSize: variant === 'h4' ? 32 : 24 }} />
     {title}
   </Typography>
 );

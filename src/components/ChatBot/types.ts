@@ -1,4 +1,3 @@
-//src/components/ChatBot/types.ts
 export interface Message {
     id: string;
     content: string;
@@ -14,15 +13,12 @@ export interface Message {
   }
   
   export interface ChatBotProps {
-    onSendMessage?: (message: string) => void;
     isOpen?: boolean;
     onClose?: () => void;
   }
-  
   export interface ResponseNode {
     content: string;
     quickReplies?: QuickReply[];
     keywords?: string[];
     route?: string;
   }
-/

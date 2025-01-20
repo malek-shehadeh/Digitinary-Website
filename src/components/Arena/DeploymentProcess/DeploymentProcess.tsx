@@ -1,7 +1,5 @@
 
 
-//
-//src/components/Arena/DeploymentProcess/DeploymentProcess.tsx
 import React from 'react';
 import MainContent from './MainContent';
 import './DeploymentProcess.scss';

@@ -1,0 +1,165 @@
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+  
+    &__content {
+      position: relative;
+      width: 480px;
+      height: 640px;
+      border-radius: 70% 30% 70% 30% / 40% 60% 40% 60%;
+      background: transparent;
+      box-shadow: inset 10px 10px 10px 10px rgba(0, 0, 0, 0.158),
+        10px 10px 20px rgba(0, 0, 0, 0.466),
+        inset -10px -10px 10px 10px rgba(255, 255, 255, 0.897);
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+  
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 48% 52% 45% 55% / 48% 67% 33% 52%;
+      }
+  
+      &::before {
+        width: 24px;
+        height: 24px;
+        top: 64px;
+        left: 96px;
+      }
+  
+      &::after {
+        width: 16px;
+        height: 16px;
+        top: 80px;
+        left: 56px;
+        border-radius: 80% 20% 91% 9% / 48% 67% 33% 52%;
+      }
+    }
+  
+    &__close-button {
+      position: absolute;
+      top: 16px;
+      right: 32px;
+      z-index: 50;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px;
+      border-radius: 50%;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+  
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  
+    &__close-icon {
+      width: 24px;
+      height: 24px;
+      color: white;
+      transition: transform 0.3s ease;
+  
+      .auth-modal__close-button:hover & {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  
+  .auth-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 64px;
+  
+    &__title {
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  
+    &__inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    &__input {
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      outline: none;
+      color: white;
+      font-size: 0.875rem;
+      backdrop-filter: blur(4px);
+      transition: border-color 0.3s ease;
+  
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+  
+      &:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  
+    &__submit-button {
+      position: relative;
+      width: 100%;
+      padding: 12px;
+      border-radius: 16px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: white;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1)
+      );
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      overflow: hidden;
+  
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      }
+  
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  
+    &__submit-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: scaleX(0);
+      transition: transform 0.5s ease;
+      transform-origin: left;
+  
+      .auth-form__submit-button:hover & {
+        transform: scaleX(1);
+      }
+    }
+  
+    &__error {
+      color: #ff6b6b;
+      text-align: center;
+      font-size: 0.875rem;
+      margin-top: 12px;
+    }
+  }

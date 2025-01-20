@@ -7,7 +7,7 @@
   transition: all 0.3s ease-in-out;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden; // Added to prevent horizontal scroll
+  overflow-x: hidden; 
 
   &.sidebar-closed {
     width: 100%;
@@ -23,7 +23,7 @@
     background-color: var(--paper-background);
     transition: background-color 0.3s ease;
     width: 100%;
-    overflow: hidden; // Added to prevent card overflow
+    overflow: hidden; 
   }
 
   .content-container {
@@ -36,14 +36,14 @@
     align-items: center;
     font-weight: 600;
     gap: $spacing-md;
-    word-break: break-word; // Added to handle long titles
+    word-break: break-word; 
   }
 
   .section-paper {
     padding: $spacing-lg;
     background-color: var(--background-default);
     transition: all 0.3s ease;
-    overflow: hidden; // Added to prevent section overflow
+    overflow: hidden; 
   }
 
   .section-header {
@@ -52,7 +52,7 @@
     font-weight: 600;
     gap: $spacing-sm;
     margin-bottom: $spacing-md;
-    flex-wrap: wrap; // Added to handle long headers
+    flex-wrap: wrap; 
   }
 
   .section-content {
@@ -70,7 +70,7 @@
 
     .step-label {
       font-weight: 500;
-      word-break: break-word; // Added for long step labels
+      word-break: break-word; 
     }
 
     .step-content {
@@ -88,7 +88,7 @@
       align-items: center;
       gap: $spacing-md;
       transition: all 0.3s ease;
-      overflow-x: auto; // Added for long commands
+      overflow-x: auto; 
       
       &::-webkit-scrollbar {
         height: 4px;
@@ -119,13 +119,13 @@
 
       .command-code {
         flex: 1;
-        white-space: pre-wrap; // Allow code to wrap
-        word-break: break-all; // Break long strings
+        white-space: pre-wrap; 
+        word-break: break-all; 
       }
 
       .command-button {
         color: var(--primary-color);
-        flex-shrink: 0; // Prevent button shrinking
+        flex-shrink: 0; 
         &:hover {
           background-color: var(--hover-bg);
         }
@@ -158,7 +158,7 @@
       display: flex;
       align-items: center;
       gap: $spacing-sm;
-      flex-wrap: wrap; // Added for better text wrapping
+      flex-wrap: wrap; 
     }
   }
 }
@@ -196,7 +196,7 @@
     }
 
     .main-title {
-      font-size: 1.5rem; // Smaller font size for mobile
+      font-size: 1.5rem; 
     }
   }
 }

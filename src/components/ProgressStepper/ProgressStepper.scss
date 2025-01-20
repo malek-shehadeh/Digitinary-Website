@@ -6,83 +6,221 @@
   width: 100%;
   padding: $spacing-lg;
   background-color: var(--paper-background);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 
   .stepper {
     margin-bottom: $spacing-lg;
+    padding: $spacing-md 0;
 
-    .MuiStepLabel-root {
-      .MuiStepLabel-label {
-        font-size: 0.9rem;
-        color: var(--text-color);
-        transition: color 0.3s ease;
-        
-        &.Mui-active {
-          color: var(--primary-color);
-          font-weight: 600;
-        }
+    // MUI Stepper overrides
+    .MuiStepConnector-root {
+      left: calc(-50% + 2.5rem);
+      right: calc(50% + 2.5rem);
+
+      .MuiStepConnector-line {
+        border-color: var(--border-color);
+        border-width: 2px;
+        transition: all 0.3s ease;
+      }
+
+      &.Mui-active .MuiStepConnector-line {
+        border-color: var(--primary-color);
+      }
+
+      &.Mui-completed .MuiStepConnector-line {
+        border-color: var(--primary-color);
+        border-width: 3px;
       }
     }
 
-    .MuiStepIcon-root {
-      color: var(--text-secondary);
-      transition: color 0.3s ease;
+    .step-item {
+      transition: transform 0.3s ease;
+      padding: 0 $spacing-md;
 
-      &.Mui-active {
-        color: var(--primary-color);
+      &.hovered {
+        transform: translateY(-2px);
       }
-      &.Mui-completed {
-        color: var(--secondary-color);
+
+      .MuiStepLabel-root {
+        .MuiStepLabel-iconContainer {
+          border-radius: 50%;
+          width: 3rem;
+          height: 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--paper-background);
+          border: 3px solid var(--border-color);
+          transition: all 0.3s ease;
+
+          .step-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+
+            &.active {
+              color: var(--primary-color);
+              transform: scale(1.1);
+              animation: pulse 2s infinite;
+            }
+
+            &.completed {
+              color: var(--primary-color);
+              transform: scale(1.1);
+            }
+          }
+        }
+
+        &.Mui-active {
+          .MuiStepLabel-iconContainer {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(64, 104, 223, 0.1);
+
+            .step-icon {
+              color: var(--primary-color);
+            }
+          }
+
+          .step-title {
+            color: var(--primary-color);
+            font-weight: 600;
+          }
+        }
+
+        &.Mui-completed {
+          .MuiStepLabel-iconContainer {
+            background: var(--primary-light);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(64, 104, 223, 0.15);
+          }
+
+          .step-title {
+            color: var(--primary-color);
+            font-weight: 600;
+          }
+        }
+
+        .optional-label {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          margin-top: 4px;
+
+          .optional-icon {
+            width: 14px;
+            height: 14px;
+            color: var(--warning-color);
+          }
+        }
+      }
+
+      .step-content {
+        margin-top: $spacing-sm;
+
+        .step-title {
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--text-primary);
+          margin-bottom: 0.25rem;
+          transition: all 0.3s ease;
+        }
+
+        .step-description {
+          font-size: 0.75rem;
+          color: var(--text-secondary);
+        }
       }
     }
   }
 
-  .stepper-content {
-    .step-text {
-      margin: $spacing-md 0;
-      font-size: 1.1rem;
-      color: var(--text-color);
-      transition: color 0.3s ease;
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+
+    .button-group-right {
+      display: flex;
+      gap: 1rem;
     }
 
-    .button-container {
+    .custom-button {
       display: flex;
-      flex-direction: row;
-      padding-top: $spacing-md;
       align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
 
-      .back-button {
-        margin-right: $spacing-md;
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
       }
 
-      .skip-button {
-        margin-right: $spacing-md;
+      .button-icon {
+        width: 1.25rem;
+        height: 1.25rem;
       }
 
-      .spacer {
-        flex: 1 1 auto;
-      }
+      &.back-button {
+        border: 1px solid var(--border-color);
+        background-color: var(--paper-background);
+        color: var(--text-primary);
 
-      .MuiButton-contained {
-        background-color: var(--primary-color);
-        transition: background-color 0.3s ease;
-        
-        &:hover {
-          background-color: var(--primary-dark);
+        &:not(.disabled):hover {
+          background-color: var(--hover-bg);
+          transform: translateX(-2px);
         }
       }
 
-      .MuiButton-text {
-        color: var(--text-color);
-        transition: background-color 0.3s ease, color 0.3s ease;
-        
+      &.skip-button {
+        border: 1px solid var(--warning-color);
+        background-color: var(--paper-background);
+        color: var(--warning-color);
+
         &:hover {
           background-color: var(--hover-bg);
         }
+
+        .button-icon {
+          color: var(--warning-color);
+        }
+      }
+
+      &.next-button {
+        background-color: var(--primary-color);
+        color: var(--paper-background);
+        border: none;
+
+        &:hover {
+          background-color: var(--primary-dark);
+          transform: translateX(2px);
+        }
       }
     }
+  }
+}
+
+// Animations
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -91,6 +229,28 @@
   .progress-stepper-container {
     padding: $spacing-md;
 
+    .stepper {
+      .step-item {
+        padding: 0 $spacing-sm;
+
+        .MuiStepLabel-root {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+
+          .MuiStepLabel-iconContainer {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            .step-icon {
+              width: 1.25rem;
+              height: 1.25rem;
+            }
+          }
+        }
+      }
+    }
+
     .button-container {
       flex-wrap: wrap;
       gap: $spacing-sm;
@@ -98,7 +258,6 @@
       button {
         flex: 1;
         min-width: 120px;
-        margin: 0;
       }
     }
   }

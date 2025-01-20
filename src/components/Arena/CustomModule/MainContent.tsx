@@ -1,4 +1,3 @@
-//src/components/Arena/CustomModule/MainContent.tsx
 import React from 'react';
 import {
   Card,
