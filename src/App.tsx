@@ -38,6 +38,7 @@ const App = () => {
                 />
               }
             />
+       
             <Route
               path="/frontend/DGatePage"
               element={<DGatePage isSidebarOpen={isSidebarOpen} />}

@@ -55,6 +55,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     setExpandedItem(expandedItem === itemName ? null : itemName);
   };
 
+  // Determine the logo based on the theme mode
+  const getLogo = () => {
+    if (isOpen) {
+      return mode === 'dark' ? "/public/Digitinary-white.png" : "/Digitinary-Logo.png";
+    } else {
+      return "/digitinary_logo-removebg-preview.png";
+    }
+  };
+
   return (
     <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-content">
@@ -72,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
 
         <div className="logo-container">
           <img
-            src={isOpen ? "/Digitinary-Logo.png" : "/digitinary_logo-removebg-preview.png"}
+            src={getLogo()}
             alt="Logo"
             className="logo-image"
           />
