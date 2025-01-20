@@ -3,7 +3,7 @@ import { Card, CardContent, Box } from '@mui/material';
 import { LibraryBooks, Article } from '@mui/icons-material';
 import SectionHeader from './SectionHeader';
 import SectionContent from './SectionContent';
-import ResourcesList from './ResourcesList';
+// import ResourcesList from './ResourcesList';
 
 const DigitinaryUI: React.FC = () => (
   <Card className="section-card">
@@ -27,12 +27,12 @@ const DigitinaryUI: React.FC = () => (
                   entire application while promoting code reuse and maintainability."
         />
 
-        {/* Resources Section */}
+        {/* Resources Section
         <ResourcesList 
           links={[
             { title: 'Digitinary-UI Documentation', url: '#' }
           ]}
-        />
+        /> */}
       </Box>
     </CardContent>
   </Card>
